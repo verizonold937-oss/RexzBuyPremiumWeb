@@ -57,6 +57,21 @@ p{margin:10px 0; font-size:1.1rem; color:#fff; text-shadow:0 0 5px #f1c40f;}
 .online-btn{display:inline-block;padding:10px 20px;background:#27ae60;color:#fff;text-decoration:none;font-weight:bold;border-radius:5px;margin-top:20px;box-shadow:0 0 10px #2ecc71;transition:0.3s;}
 .online-btn:hover{background:#2ecc71;box-shadow:0 0 20px #27ae60;}
 
+/* Toggle audio button */
+#audioToggle{
+  display:inline-block;
+  padding:10px 20px;
+  background:#f39c12;
+  color:#fff;
+  font-weight:bold;
+  border-radius:5px;
+  margin-top:15px;
+  cursor:pointer;
+  box-shadow:0 0 10px #f1c40f;
+  transition:0.3s;
+}
+#audioToggle:hover{background:#f1c40f; box-shadow:0 0 20px #f39c12;}
+
 /* Lampu */
 .lampu{position:absolute;width:12px;height:12px;background:#f1c40f;border-radius:50%;opacity:0.8;animation:blink 1.5s ease-in-out infinite alternate;}
 @keyframes blink{0%{opacity:0.2;transform:scale(0.5);}50%{opacity:1;transform:scale(1.2);}100%{opacity:0.2;transform:scale(0.5);}}
@@ -94,6 +109,7 @@ p{margin:10px 0; font-size:1.1rem; color:#fff; text-shadow:0 0 5px #f1c40f;}
 <p>Jika ada kata yang tak terjaga,<br>Jika ada janji yang terabaikan,<br>Jika ada sikap yang menyinggung,<br>Jika ada langkah yang salah,<br>Mari kita saling memaafkan.<br>Semoga hari yang fitri ini membawa berkah & kebahagiaan.</p>
 
 <div id="statusContainer"></div>
+<div id="audioToggle">🎵 Audio: ON</div>
 
 <p class="footer">🌟 REXZ HUB 🌟<br>1 Syawal 1446 H / 2025 M</p>
 
@@ -108,7 +124,7 @@ p{margin:10px 0; font-size:1.1rem; color:#fff; text-shadow:0 0 5px #f1c40f;}
 <div class="lampu" style="top:300px; left:50%;"></div>
 </div>
 
-<audio id="themeAudio" loop>
+<audio id="themeAudio" loop autoplay>
   <source src="https://assets.mixkit.co/music/preview/mixkit-festive-music-72.mp3" type="audio/mpeg">
 </audio>
 
@@ -135,11 +151,23 @@ if(isOnline){
 // Preloader fade out
 window.addEventListener('load',()=>{
   setTimeout(()=>{
-    const pre=document.getElementById('preloader');
-    pre.classList.add('hidden');
+    document.getElementById('preloader').classList.add('hidden');
     document.getElementById('mainContent').style.display='block';
     document.getElementById('themeAudio').play();
   },3000);
+});
+
+// Toggle audio
+const audioBtn = document.getElementById('audioToggle');
+const audio = document.getElementById('themeAudio');
+audioBtn.addEventListener('click',()=>{
+  if(audio.paused){
+    audio.play();
+    audioBtn.textContent = "🎵 Audio: ON";
+  }else{
+    audio.pause();
+    audioBtn.textContent = "🎵 Audio: OFF";
+  }
 });
 </script>
 </body>
